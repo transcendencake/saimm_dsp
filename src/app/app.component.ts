@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MenuService } from './services/menu.service';
+import { LogosService } from './services/logos.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'univer-labs';
+  links: any[];
+  logo: string;
+
+  constructor(menuService: MenuService, logosService: LogosService) {
+    const key = 'saimm';
+    this.links = menuService.getMenuItems(key);
+    this.logo = logosService.getLogos(key);
+  }
 }

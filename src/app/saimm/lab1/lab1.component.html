@@ -1,0 +1,79 @@
+<section>
+  <h2 class="h1 py-3 font-weight-bold">Лабораторная работа 1</h2>
+  <h3 class="h2 font-weight-bold">Часть 1. Условие</h3>
+  <p class="mb-2 pb-3 lead grey-text">
+    Построить (написать программу) генератор последовательности равномерно распределенных случайных чисел на основе
+    алгоритма Лемера. Предусмотреть при этом возможность ввода параметров a, R0, m с клавиатуры.
+  </p>
+  <h3 class="h3 font-weight-bold">Часть 1. Решение</h3>
+  <h4 class="h5 font-weight-bold">Ввод исходных данных</h4>
+  <form class="d-flex justify-content-between">
+    <div class="md-form">
+      <input mdbInputDirective
+        type="text"
+        name="a"
+        [(ngModel)]="lemmInput.a"
+        (ngModelChange)="countLemm()"
+        class="form-control">
+      <label for="a"
+        [class.active]="lemmInput.a != null"
+        class="">Введите a</label>
+    </div>
+    <div class="md-form">
+      <input mdbInputDirective
+        type="text"
+        name="m"
+        [(ngModel)]="lemmInput.m"
+        (ngModelChange)="countLemm()"
+        id="m"
+        class="form-control">
+      <label for="m"
+        [class.active]="lemmInput.m != null"
+        class="">Введите m</label>
+    </div>
+    <div class="md-form">
+      <input mdbInputDirective
+        type="text"
+        name="r0"
+        [(ngModel)]="lemmInput.r0"
+        (ngModelChange)="countLemm()"
+        id="r0"
+        class="form-control">
+      <label for="r0"
+        [class.active]="lemmInput.r0 != null"
+        class="">Введите R0</label>
+    </div>
+  </form>
+  <h4 class="h5 font-weight-bold">Иллюстрация работы алгоритма для первых {{lemmInput.amount}} чисел, полагая в качестве исходных: <i>a={{lemmInput.a}}, m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
+  <div class="my-3 d-flex flex-column">
+    <div class="gray d-flex justify-content-between">
+      <div class="n font-weight-bold">N</div>
+      <div class="r_prev font-weight-bold">R<sub>n-1</sub></div>
+      <div class="a_r_prev font-weight-bold">aR<sub>n-1</sub></div>
+      <div class="r_curr font-weight-bold">R<sub>n</sub></div>
+      <div class="x_curr font-weight-bold">X<sub>n</sub></div>
+    </div>
+    <div *ngFor="let lemm of lemmRandomDebugInfo" class="d-flex justify-content-between">
+      <div class="n">{{ lemm.n }}</div>
+      <div class="r_prev">{{ lemm.r_prev }}</div>
+      <div class="a_r_prev">{{ lemm.a_r_prev }}</div>
+      <div class="r_curr">{{ lemm.r_curr }}</div>
+      <div class="x_curr">{{ lemm.x_curr }}</div>
+    </div>
+  </div>
+  <h3 class="h2 font-weight-bold">Часть 2. Условие</h3>
+  <p class="mb-2 pb-3 lead grey-text">
+	Для полученной выборки чисел построить гистограмму (20 интервалов), рассчитать значения оценок для математического ожидания M, дисперсии D и среднего квадратичного отклонении (σ ̃ ).
+  </p>
+  <h3 class="h2 font-weight-bold">Часть 2. Решение</h3>
+  <h3 class="h2 font-weight-bold">Часть 3. Условие</h3>
+  <p class="mb-2 pb-3 lead grey-text">
+	Оценить равномерность последовательности по косвенным признакам.
+  </p>
+  <h3 class="h2 font-weight-bold">Часть 3. Решение</h3>
+  <h3 class="h2 font-weight-bold">Часть 4. Условие</h3>
+  <p class="mb-2 pb-3 lead grey-text">
+Найти длину периода и участка апериодичности. Варьируя значениями параметров a, R0, m, добиться длины периода не менее 50000 чисел.
+  </p>
+  <h3 class="h2 font-weight-bold">Часть 4. Решение</h3>
+</section>
