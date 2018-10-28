@@ -1,7 +1,7 @@
 <section>
   <h2 class="h1 py-3 font-weight-bold">Лабораторная работа 1</h2>
   <h3 class="h2 font-weight-bold">Часть 1. Условие</h3>
-  <p class="mb-2 pb-3 lead grey-text">
+  <p class="mb-2 pb-3 lead ">
     Построить (написать программу) генератор последовательности равномерно распределенных случайных чисел на основе
     алгоритма Лемера. Предусмотреть при этом возможность ввода параметров a, R0, m с клавиатуры.
   </p>
@@ -44,27 +44,40 @@
         class="">Введите R0</label>
     </div>
   </form>
-  <h4 class="h5 font-weight-bold">Иллюстрация работы алгоритма для первых {{lemmInput.amount}} чисел, полагая в
-    качестве исходных: <i>a={{lemmInput.a}}, m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
-  <div class="my-3 d-flex flex-column">
-    <div class="gray d-flex justify-content-between">
-      <div class="n font-weight-bold">N</div>
-      <div class="r_prev font-weight-bold">R<sub>n-1</sub></div>
-      <div class="a_r_prev font-weight-bold">aR<sub>n-1</sub></div>
-      <div class="r_curr font-weight-bold">R<sub>n</sub></div>
-      <div class="x_curr font-weight-bold">X<sub>n</sub></div>
-    </div>
-    <div *ngFor="let lemm of lemmRandomDebugInfo"
-      class="d-flex justify-content-between">
-      <div class="n">{{ lemm.n }}</div>
-      <div class="r_prev">{{ lemm.r_prev }}</div>
-      <div class="a_r_prev">{{ lemm.a_r_prev }}</div>
-      <div class="r_curr">{{ lemm.r_curr }}</div>
-      <div class="x_curr">{{ lemm.x_curr }}</div>
+  <div *ngIf="lemmRandomDebugInfo.length > 0">
+    <h4 class="h5 font-weight-bold">Иллюстрация работы алгоритма для первых {{lemmInput.amount}} чисел, полагая в
+      качестве исходных: <i>a={{lemmInput.a}}, m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
+    <div class="my-3 d-flex flex-column">
+      <div class="gray d-flex justify-content-between">
+        <div class="w-20 flex-grow-0 flex-shrink-0 n font-weight-bold">N</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 r_prev font-weight-bold">R<sub>n-1</sub></div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 a_r_prev font-weight-bold">aR<sub>n-1</sub></div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 r_curr font-weight-bold">R<sub>n</sub></div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 x_curr font-weight-bold">X<sub>n</sub></div>
+      </div>
+      <div *ngFor="let lemm of lemmRandomDebugInfo; let i = index"
+        [class.grey]="i % 2 === 0"
+        class="d-flex justify-content-between">
+        <div class="w-20 flex-grow-0 flex-shrink-0 n">{{ lemm.n }}</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 r_prev">{{ lemm.r_prev }}</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 a_r_prev">{{ lemm.a_r_prev }}</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 r_curr">{{ lemm.r_curr }}</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 x_curr">{{ lemm.x_curr }}</div>
+      </div>
     </div>
   </div>
+  <div class="actions">
+    <button class="btn btn-primary"
+      (click)="add5()">Add 5 digits</button>
+    <button [disabled]="lemmRandomDebugInfo.length === 5"
+      class="btn btn-primary"
+      (click)="remove5()">Remove 5 digits</button>
+  </div>
+</section>
+<hr class="mb-3">
+<section class="part2 lightgrey">
   <h3 class="h2 font-weight-bold">Часть 2. Условие</h3>
-  <p class="mb-2 pb-3 lead grey-text">
+  <p class="mb-2 pb-3 lead ">
     Для полученной выборки чисел построить гистограмму (20 интервалов), рассчитать значения оценок для математического
     ожидания M, дисперсии D и среднего квадратичного отклонении (σ ̃ ).
   </p>
@@ -78,22 +91,108 @@
       [labels]="barChart.labels">
     </canvas>
   </div>
-  <h4 class="h5 font-weight-bold">Оценки для распределения для {{lemmInput.bigAmount}} чисел, полагая в качестве исходных: <i>a={{lemmInput.a}},
+  <h4 class="h5 font-weight-bold">Оценки для распределения для {{lemmInput.bigAmount}} чисел, полагая в качестве
+    исходных: <i>a={{lemmInput.a}},
       m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
-  <div class="px-3">
+  <div>
     <div><span class="font-weight-bold">Математическое ожидание: </span> {{ randomProperties.M }}</div>
     <div><span class="font-weight-bold">Дисперсия: </span> {{ randomProperties.D }}</div>
     <div><span class="font-weight-bold">Среднее Квадратичное Отклонение: </span> {{ randomProperties.SKO }}</div>
   </div>
+</section>
+<hr class="mb-3">
+<section class="part3">
   <h3 class="h2 font-weight-bold">Часть 3. Условие</h3>
-  <p class="mb-2 pb-3 lead grey-text">
+  <p class="mb-2 lead">
     Оценить равномерность последовательности по косвенным признакам.
   </p>
   <h3 class="h2 font-weight-bold">Часть 3. Решение</h3>
+  <div>
+    <p class="lead">Суть метода сводится к тому, чтобы рассчитать относительную частоту попадания точек в круг. Если числа
+      равномерны, полученное числе должно стремится к значениею P/4.</p>
+    <div><span class="font-weight-bold">Относительная частота: </span> {{
+      kosvenniePriznaki.otnositelnayaChastotaPopadaniya }}</div>
+    <div><span class="font-weight-bold">P/4: </span> {{ kosvenniePriznaki.pNa4 }}</div>
+  </div>
+</section>
+<hr class="mb-3">
+<section class="part4">
   <h3 class="h2 font-weight-bold">Часть 4. Условие</h3>
-  <p class="mb-2 pb-3 lead grey-text">
+  <p class="mb-2 pb-3 lead ">
     Найти длину периода и участка апериодичности. Варьируя значениями параметров a, R0, m, добиться длины периода не
     менее 50000 чисел.
   </p>
   <h3 class="h2 font-weight-bold">Часть 4. Решение</h3>
+  <h4 class="h5 font-weight-bold">Ввод исходных данных(рекомендуемые a=333, m=9999999, R<sub>0</sub>=1)</h4>
+  <form class="d-flex justify-content-between">
+    <div class="md-form">
+      <input mdbInputDirective
+        type="text"
+        name="a"
+        [(ngModel)]="lemmInput.a"
+        (ngModelChange)="onLemmInputChange()"
+        class="form-control">
+      <label for="a"
+        [class.active]="lemmInput.a != null"
+        class="">Введите a</label>
+    </div>
+    <div class="md-form">
+      <input mdbInputDirective
+        type="text"
+        name="m"
+        [(ngModel)]="lemmInput.m"
+        (ngModelChange)="onLemmInputChange()"
+        id="m"
+        class="form-control">
+      <label for="m"
+        [class.active]="lemmInput.m != null"
+        class="">Введите m</label>
+    </div>
+    <div class="md-form">
+      <input mdbInputDirective
+        type="text"
+        name="r0"
+        [(ngModel)]="lemmInput.r0"
+        (ngModelChange)="onLemmInputChange()"
+        id="r0"
+        class="form-control">
+      <label for="r0"
+        [class.active]="lemmInput.r0 != null"
+        class="">Введите R0</label>
+    </div>
+  </form>
+  <div>
+    <div><span class="font-weight-bold">Длина периода: </span> {{ randomProperties.period_length }}</div>
+    <div><span class="font-weight-bold">Длина отрезка апериодичности: </span> {{ randomProperties.aperiodichnost_length
+      }}</div>
+  </div>
+  <div *ngIf="lemmRandomDebugInfo.length > 0">
+    <h4 class="h5 font-weight-bold">Иллюстрация работы алгоритма для первых {{lemmInput.amount}} чисел, полагая в
+      качестве исходных: <i>a={{lemmInput.a}}, m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
+    <div class="my-3 d-flex flex-column">
+      <div class="gray d-flex justify-content-between">
+        <div class="w-20 flex-grow-0 flex-shrink-0 n font-weight-bold">N</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 r_prev font-weight-bold">R<sub>n-1</sub></div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 a_r_prev font-weight-bold">aR<sub>n-1</sub></div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 r_curr font-weight-bold">R<sub>n</sub></div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 x_curr font-weight-bold">X<sub>n</sub></div>
+      </div>
+      <div *ngFor="let lemm of lemmRandomDebugInfo; let i = index"
+        [class.grey]="i % 2 === 0"
+        class="d-flex justify-content-between">
+        <div class="w-20 flex-grow-0 flex-shrink-0 n">{{ lemm.n }}</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 r_prev">{{ lemm.r_prev }}</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 a_r_prev">{{ lemm.a_r_prev }}</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 r_curr">{{ lemm.r_curr }}</div>
+        <div class="w-20 flex-grow-0 flex-shrink-0 x_curr">{{ lemm.x_curr }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-primary"
+      (click)="add5()">Add 5 digits</button>
+    <button [disabled]="lemmRandomDebugInfo.length === 5"
+      class="btn btn-primary"
+      (click)="remove5()">Remove 5 digits</button>
+  </div>
 </section>

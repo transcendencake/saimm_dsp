@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { debounce } from 'lodash';
 
 type ChartType = 'bar';
 
@@ -46,6 +47,11 @@ interface IBarChart {
   labels: string[];
 }
 
+interface IKosvenniePriznaki {
+  otnositelnayaChastotaPopadaniya: number;
+  pNa4: number;
+}
+
 @Component({
   selector: 'app-lab1',
   templateUrl: './lab1.component.html',
@@ -57,7 +63,7 @@ export class Lab1Component implements OnInit {
     m: 5,
     r0: 1,
     amount: 5,
-    bigAmount: 50000
+    bigAmount: 250000
   };
   barChart: IBarChart = {
     datasets: [
@@ -80,21 +86,40 @@ export class Lab1Component implements OnInit {
   };
   randomProperties: IRandomNumberProperties = {} as IRandomNumberProperties;
   lemmRandomDebugInfo: ILemmRandomDebugInfo[] = [];
-  lemmBigAmount = 50000;
+  kosvenniePriznaki: IKosvenniePriznaki = {
+    otnositelnayaChastotaPopadaniya: null,
+    pNa4: Math.PI / 4
+  }
 
-  constructor() { }
+  constructor() {
+    this.onLemmInputChange = debounce(this.onLemmInputChange.bind(this), 500);
+  }
 
   ngOnInit() {
     this.onLemmInputChange();
   }
 
-  onLemmInputChange() {
+  add5() {
+    this.lemmInput.amount += 5;
     const { a, m, r0, amount } = this.lemmInput;
+    this.lemmRandomDebugInfo = this.getLemms(a, m, r0, amount);
+  }
+
+  remove5() {
+    if (this.lemmInput.amount > 0) {
+      this.lemmInput.amount -= 5;
+    }
+    const { a, m, r0, amount } = this.lemmInput;
+    this.lemmRandomDebugInfo = this.getLemms(a, m, r0, amount);
+  }
+
+  onLemmInputChange() {
+    const { a, m, r0, amount, bigAmount } = this.lemmInput;
     if (!a || !m || !r0) {
       return;
     }
     var t0 = performance.now();
-    const lemms = this.getLemms(a, m, r0, this.lemmBigAmount);
+    const lemms = this.getLemms(a, m, r0, bigAmount);
     var t1 = performance.now();
     console.log('Time for generating 50000 numbers: ' + (t1 - t0));
     const nums = lemms.map(lem => lem.x_curr);
@@ -108,6 +133,17 @@ export class Lab1Component implements OnInit {
     var t4 = performance.now();
     console.log('Time for generating gistogram data: ' + (t4 - t3));
     this.randomProperties = this.getRandomProperties(nums);
+    this.kosvenniePriznaki.otnositelnayaChastotaPopadaniya = this.getOtnositelnayaChastotaPopadaniya(nums);
+  }
+
+  getOtnositelnayaChastotaPopadaniya(nums: number[]): number {
+    let k = 0;
+    for (let i = 0; i < nums.length; i += 2) {
+      if (Math.pow(nums[i], 2) + Math.pow(nums[i + 1], 2) < 1) {
+        ++k;
+      }
+    }
+    return (2 * k) / nums.length;
   }
 
   getDataForGistogramm(intervalsAmount: number, nums: number[]): number[] {
@@ -122,11 +158,12 @@ export class Lab1Component implements OnInit {
   getRandomProperties(nums: number[]): IRandomNumberProperties {
     const M = this.getM(nums);
     const D = this.getD(nums, M);
+    const period_length = this.getPeriodLength(nums);
     return {
-      aperiodichnost_length: this.getAperiodichnostLength(nums),
+      aperiodichnost_length: this.getAperiodichnostLength(nums, period_length),
       D,
       M,
-      period_length: this.getPeriodLength(nums),
+      period_length,
       SKO: this.getSKO(D)
     };
   }
@@ -145,12 +182,39 @@ export class Lab1Component implements OnInit {
     return Math.sqrt(d);
   }
 
-  getAperiodichnostLength(nums: number[]): number {
-    return null;
+  getAperiodichnostLength(nums: number[], periodLength: number): number {
+    let i3: number = null;
+    for (let i = 0; i < nums.length - periodLength; ++i) {
+      if (nums[i] === nums[i + periodLength]) {
+        i3 = i;
+        break;
+      }
+    }
+    if (i3 === null) {
+      throw 'Unknown error, i3 should not be null';
+    }
+    return i3 + periodLength;
   }
 
   getPeriodLength(nums: number[]): number {
-    return null;
+    const v = (1 / 5) * Math.pow(10, 6);
+    const xv = nums[v];
+    let i1: number = null;
+    let i2: number = null;
+    for (let i = 0; i < nums.length; ++i) {
+      if (nums[i] == xv) {
+        if (i1 == null) {
+          i1 = i;
+        } else {
+          i2 = i;
+          break;
+        }
+      }
+    }
+    if (i2 == null || i1 == null) {
+      throw 'Unknown error, neither i1 or i2 should not be null'
+    }
+    return i2 - i1;
   }
 
   getLemms(a: number, m: number, r0: number, amount: number): ILemmRandomDebugInfo[] {
