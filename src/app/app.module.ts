@@ -1,12 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
+import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { AboutComponent } from './about/about.component';
 import { MenuService } from './services/menu.service';
-import { RouterModule } from '@angular/router';
+import { ArrayUtils } from './utils/array.utils';
+import { FunctionUtils } from './utils/function.utils';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,13 +15,11 @@ import { RouterModule } from '@angular/router';
     AboutComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     RouterModule,
-    AppRoutingModule,
-    MDBBootstrapModule
+    AppRoutingModule
   ],
-  providers: [MenuService],
-  bootstrap: [AppComponent],
-  schemas: [ NO_ERRORS_SCHEMA ]
+  providers: [MenuService, ArrayUtils, FunctionUtils],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

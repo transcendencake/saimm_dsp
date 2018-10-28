@@ -1,18 +1,30 @@
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue scrolling-navbar" [containerInside]="true">
-  <logo>
-      <a class="logo navbar-brand" href="#"><strong>{{ logo }}</strong></a>
-  </logo>
-  <links>
-      <ul class="navbar-nav mr-auto">
-          <li *ngFor="let link of links" [ngClass]="{'active': rla.isActive}" class="nav-item waves-light" mdbRippleRadius>
-              <a class="nav-link" [routerLink]="link.link" #rla=routerLinkActive routerLinkActive>{{ link.title }}</a>
-          </li>
-      </ul>
-  </links>
-</mdb-navbar>
-<!-- Main -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand"
+            href="#"><strong>{{ logo }}</strong></a>
+        <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav">
+                <a *ngFor="let link of links"
+                    [class.active]="rla.isActive"
+                    class="nav-item nav-link"
+                    [routerLink]="link.link"
+                    #rla=routerLinkActive
+                    routerLinkActive>{{ link.title }}</a>
+            </div>
+        </div>
+    </div>
+</nav>
 <main>
-  <div class="container" >
-     <router-outlet></router-outlet> 
-  </div>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
 </main>

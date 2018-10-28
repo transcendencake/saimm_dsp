@@ -9,7 +9,7 @@
   <h4 class="h5 font-weight-bold">Ввод исходных данных</h4>
   <form class="d-flex justify-content-between">
     <div class="md-form">
-      <input mdbInputDirective
+      <input 
         type="text"
         name="a"
         [(ngModel)]="lemmInput.a"
@@ -85,7 +85,7 @@
   <h4 class="h5 font-weight-bold">Гистограмма для {{lemmInput.bigAmount}} чисел, полагая в качестве исходных: <i>a={{lemmInput.a}},
       m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
   <div>
-    <canvas mdbChart
+    <canvas baseChart
       [chartType]="barChart.type"
       [datasets]="barChart.datasets"
       [labels]="barChart.labels">
