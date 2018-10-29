@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatInputModule, MatExpansionModule } from '@angular/material';
+import { MatRadioModule ,MatButtonModule, MatExpansionModule, MatInputModule } from '@angular/material';
+import { ChartsModule } from 'ng2-charts';
 
 import { Lab1Component } from './lab1/lab1.component';
+import { BigArrayComponent } from './lab2/big-array/big-array.component';
+import { DistributionComponent } from './lab2/distribution/distribution.component';
 import { DistributionService } from './lab2/distributions/distribution.service';
-import { UniformDistributionComponent } from './lab2/distributions/uniform-distribution/uniform-distribution.component';
 import { GistogramComponent } from './lab2/gistogram/gistogram.component';
 import { Lab2Component } from './lab2/lab2.component';
 import { SaimmRoutingModule } from './saimm-routing.module';
 import { SaimmComponent } from './saimm.component';
-import { ChartsModule } from 'ng2-charts';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -21,14 +21,16 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatButtonModule,
     ChartsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatRadioModule
   ],
   declarations: [
     SaimmComponent,
     Lab1Component,
     Lab2Component,
     GistogramComponent,
-    UniformDistributionComponent
+    BigArrayComponent,
+    DistributionComponent
   ],
   providers: [DistributionService]
 })

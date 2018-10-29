@@ -1,11 +1,237 @@
 <h2 class="h1 py-3 font-weight-bold">Лабораторная работа 2</h2>
-<mat-accordion>
+<div class="mb-2">
+    <button mat-button
+        mat-raised-button
+        class="mr-2"
+        (click)="matAccordion.openAll()"
+        color="primary">Развернуть все панели</button>
+    <button mat-button
+        mat-raised-button
+        class="mr-2"
+        (click)="matAccordon.closeAll()"
+        color="primary">Свернуть все панели</button>
+    <p class="note">Сворачивание панелей занимает несколько секунд</p>
+</div>
+<mat-accordion #matAccordion="matAccordion"
+    mat-accordion
+    [multi]="true">
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                Нормальное распределение
+                Равномерное распределение
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-uniform-distribution></app-uniform-distribution>
+        <app-distribution [distribution]="distributions.uniform.distribution">
+            <p class="font-weight-bold">Входные параметры распределения</p>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="a"
+                    [(ngModel)]="distributions.uniform.settings.start">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="b"
+                    [(ngModel)]="distributions.uniform.settings.end">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="amount"
+                    [(ngModel)]="distributions.uniform.settings.amount">
+            </mat-form-field>
+            <p>
+                <button mat-button
+                    mat-raised-button
+                    color="primary"
+                    (click)="updateUniformDistribution()">Сгенерировать нормальное распределение</button>
+            </p>
+            <hr>
+        </app-distribution>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Гауссовское распределение
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-distribution [distribution]="distributions.gaussian.distribution">
+            <p class="font-weight-bold">Входные параметры распределения</p>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="m"
+                    [(ngModel)]="distributions.gaussian.settings.m">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="d"
+                    [(ngModel)]="distributions.gaussian.settings.d">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="amount"
+                    [(ngModel)]="distributions.gaussian.settings.amount">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="R amount"
+                    [(ngModel)]="distributions.gaussian.settings.randAmount">
+            </mat-form-field>
+            <p>
+                <button mat-button
+                    mat-raised-button
+                    color="primary"
+                    (click)="updatedGaussinDistribution()">Сгенерировать гауссовское распределение</button>
+            </p>
+            <hr>
+        </app-distribution>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Экспоненциальное распределение
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-distribution [distribution]="distributions.exponential.distribution">
+            <p class="font-weight-bold">Входные параметры распределения</p>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="lambda"
+                    [(ngModel)]="distributions.exponential.settings.lambda">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="amount"
+                    [(ngModel)]="distributions.exponential.settings.amount">
+            </mat-form-field>
+            <p>
+                <button mat-button
+                    mat-raised-button
+                    color="primary"
+                    (click)="updateExponentialDistribution()">Сгенерировать экспоненциальное распределение</button>
+            </p>
+            <hr>
+        </app-distribution>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Гамма распределение
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-distribution [distribution]="distributions.gamma.distribution">
+            <p class="font-weight-bold">Входные параметры распределения</p>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="lambda"
+                    [(ngModel)]="distributions.gamma.settings.lambda">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="n"
+                    [(ngModel)]="distributions.gamma.settings.n">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="amount"
+                    [(ngModel)]="distributions.gamma.settings.amount">
+            </mat-form-field>
+            <p>
+                <button mat-button
+                    mat-raised-button
+                    color="primary"
+                    (click)="updateGammaDistribution()">Сгенерировать гамма распределение</button>
+            </p>
+            <hr>
+        </app-distribution>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Треугольное распределение
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-distribution [distribution]="distributions.triangle.distribution">
+            <p class="font-weight-bold">Входные параметры распределения</p>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="a"
+                    [(ngModel)]="distributions.triangle.settings.start">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="b"
+                    [(ngModel)]="distributions.triangle.settings.end">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="amount"
+                    [(ngModel)]="distributions.triangle.settings.amount">
+            </mat-form-field>
+            <p>
+                <mat-radio-group [(ngModel)]="distributions.triangle.settings.mode">
+                    <mat-radio-button class="mr-2"
+                        *ngFor="let mode of triangleModes"
+                        [value]="mode.value">
+                        {{ mode.label }}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </p>
+            <p>
+                <button mat-button
+                    mat-raised-button
+                    color="primary"
+                    (click)="updateTriangleDistribution()">Сгенерировать треугольное распределение</button>
+            </p>
+            <hr>
+        </app-distribution>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Распределение Симпсона
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-distribution [distribution]="distributions.simpson.distribution">
+            <p class="font-weight-bold">Входные параметры распределения</p>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="a"
+                    [(ngModel)]="distributions.simpson.settings.start">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="b"
+                    [(ngModel)]="distributions.simpson.settings.end">
+            </mat-form-field>
+            <mat-form-field class="mr-2">
+                <input matInput
+                    type="number"
+                    placeholder="amount"
+                    [(ngModel)]="distributions.simpson.settings.amount">
+            </mat-form-field>
+            <p>
+                <button mat-button
+                    mat-raised-button
+                    color="primary"
+                    (click)="updateSimpsonDistribution()">Сгенерировать треугольное распределение</button>
+            </p>
+            <hr>
+        </app-distribution>
     </mat-expansion-panel>
 </mat-accordion>

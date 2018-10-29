@@ -13,8 +13,14 @@ export class GistogramComponent {
 
   labels: string[] = [];
 
-  @Input() set data(data: number[]) {
-    this.labels = data.map((el, index) => index.toString());
-    this.datasets[0].data = data;
+  @Input() set data(data: IGistogramData[]) {
+    if (data) {
+      this.labels = data.map((el) => this.getLabel(el.start, el.end));
+      this.datasets[0].data = data.map(el => el.amount);
+    }
+  }
+
+  private getLabel(min: number, max: number): string {
+    return `[${min.toFixed(2)}, ${max.toFixed(2)})`
   }
 }

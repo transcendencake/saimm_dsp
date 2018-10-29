@@ -1,0 +1,11 @@
+<ng-content></ng-content>
+<app-big-array [array]="distributionElements"></app-big-array>
+<hr>
+<app-gistogram [data]="gistogramData"></app-gistogram>
+<hr>
+<p class="font-weight-bold">Статистические оценки распределения</p>
+<div>
+    <div><span class="font-weight-bold">Математическое ожидание: </span> {{ m }}</div>
+    <div><span class="font-weight-bold">Дисперсия: </span> {{ d }}</div>
+    <div><span class="font-weight-bold">Среднее Квадратичное Отклонение: </span> {{ sko }}</div>
+</div>

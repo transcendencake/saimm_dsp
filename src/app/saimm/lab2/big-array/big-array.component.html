@@ -1,3 +1,35 @@
-<p>
-  big-array works!
-</p>
+<div>
+  <p class="font-weight-bold">{{ title }}</p>
+  <div style="overflow: hidden">
+    <span *ngFor="let item of displayedItems; let i = index"
+      [ngClass]="{'bg-dark': i % 2 === 0, 'text-white': i % 2 === 0 }"
+      class="float-left px-2">{{ item }}</span>
+  </div>
+</div>
+<div class="actions">
+  <mat-form-field class="mr-2">
+    <input type="number"
+      matInput
+      [(ngModel)]="step"
+      (ngModelChange)="stepChanged()"
+      #inputStep
+      required
+      min="1"
+      step="1"
+      placeholder="Шаг">
+    <mat-error *ngIf="inputStep.invalid">
+      Должно быть целым числом
+    </mat-error>
+  </mat-form-field>
+  <button mat-button
+    mat-raised-button
+    color="primary"
+    class="mr-2"
+    [disabled]="inputStep.invalid || displayedItems.length >= items.length"
+    (click)="add()">Добавить {{ step }}</button>
+  <button mat-button
+    mat-raised-button
+    color="primary"
+    [disabled]="inputStep.invalid || displayedItems.length == 0"
+    (click)="remove()">Убрать {{ step }}</button>
+</div>
