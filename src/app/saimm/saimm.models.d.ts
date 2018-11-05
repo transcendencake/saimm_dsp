@@ -40,7 +40,7 @@ interface ISmo {
 }
 
 interface IPossible<TValue> {
-    possible: number;
+    possibility: number;
     value: TValue;
 }
 
