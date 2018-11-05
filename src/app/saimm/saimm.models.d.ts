@@ -32,3 +32,20 @@ interface IGammaDistributionSettings {
 interface ITriangleDistributionSettings extends IDistributionSettingsBase {
     mode: number;
 }
+
+interface ISmo {
+    getState(): string;
+    getPossibleStates(): IPossible<number>[];
+    setState(state: string);
+}
+
+interface IPossible<TValue> {
+    possible: number;
+    value: TValue;
+}
+
+interface ISmoNode {
+    value: number;
+    getPossibleNextValues(): IPossible<number>[];
+    getNextValue(): number;
+}

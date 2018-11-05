@@ -12,6 +12,7 @@ import { GistogramComponent } from './lab2/gistogram/gistogram.component';
 import { Lab2Component } from './lab2/lab2.component';
 import { SaimmRoutingModule } from './saimm-routing.module';
 import { SaimmComponent } from './saimm.component';
+import { Kr1Component } from './kr1/kr1.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { SaimmComponent } from './saimm.component';
     Lab2Component,
     GistogramComponent,
     BigArrayComponent,
-    DistributionComponent
+    DistributionComponent,
+    Kr1Component
   ],
   providers: [DistributionService]
 })
