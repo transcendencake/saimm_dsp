@@ -13,6 +13,7 @@ import { Lab2Component } from './lab2/lab2.component';
 import { SaimmRoutingModule } from './saimm-routing.module';
 import { SaimmComponent } from './saimm.component';
 import { Kr1Component } from './kr1/kr1.component';
+import { SmoService } from './kr1/smo.service';
 
 @NgModule({
   imports: [
@@ -34,6 +35,6 @@ import { Kr1Component } from './kr1/kr1.component';
     DistributionComponent,
     Kr1Component
   ],
-  providers: [DistributionService]
+  providers: [DistributionService, SmoService]
 })
 export class SaimmModule { }

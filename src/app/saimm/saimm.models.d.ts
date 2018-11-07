@@ -1,6 +1,6 @@
 interface IDistributionSettingsBase {
     start: number;
-    end:  number;
+    end: number;
     amount: number;
 }
 
@@ -35,8 +35,13 @@ interface ITriangleDistributionSettings extends IDistributionSettingsBase {
 
 interface ISmo {
     getState(): string;
-    getPossibleStates(): IPossible<number>[];
+    getPossibleStates(): string[];
     setState(state: string);
+    getCopy(): ISmo;
+}
+
+interface ISmoDrawer {
+    drawSmoGraph(graph: ISmoGraph): void;
 }
 
 interface IPossible<TValue> {
@@ -46,6 +51,33 @@ interface IPossible<TValue> {
 
 interface ISmoNode {
     value: number;
-    getPossibleNextValues(): IPossible<number>[];
+    getPossibleNextValues(): number[];
     getNextValue(): number;
+}
+
+interface ISmoAnalyseModel {
+    state: string;
+    possibleStates: ISmoAnalyseModel[];
+}
+
+interface ISmoBuildAnalyseModelParams {
+    smo: ISmo;
+    visit(state: string): void;
+    isVisited(state: string): boolean;
+}
+
+interface ISmoGraph {
+    tree: ISmoAnalyseModel;
+    states: string[];
+}
+
+interface IDrawnState {
+    x: number;
+    y: number;
+    freeConnectionIndex: 0;
+}
+
+interface IConnectionState {
+    from: string;
+    to: string;
 }

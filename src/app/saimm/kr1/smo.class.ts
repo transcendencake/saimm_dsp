@@ -1,3 +1,5 @@
+import { AlghorythmUtils } from "src/app/utils/alghorythm.utils";
+
 export class SmoClass implements ISmo {
     source: ISmoNode = {
         value: 0,
@@ -22,22 +24,29 @@ export class SmoClass implements ISmo {
     constructor() {
     }
 
-    private get nodes(): ISmoNode[] {
-        return [this.source, this.storage, this.destination];
-    }
-
     getState(): string {
         return this.nodes.map(node => node.value).join('');
     }
 
     getPossibleStates(): string[] {
-        const states: string[] = [];
-        return [];
+        const possibleValueArrays = this.nodes.map(node => node.getPossibleNextValues());
+        return [...AlghorythmUtils.Cartesian(possibleValueArrays)]
+            .map((arr: number[]) => arr.join(''));
     }
 
     setState(state: string): void {
         this.source.value = Number(state[0]);
         this.storage.value = Number(state[1]);
         this.destination.value = Number(state[2]);
+    }
+
+    getCopy(): SmoClass {
+        const smo = new SmoClass();
+        smo.setState(this.getState());
+        return smo;
+    }
+
+    private get nodes(): ISmoNode[] {
+        return [this.source, this.storage, this.destination];
     }
 }
