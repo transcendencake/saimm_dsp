@@ -17,9 +17,7 @@ export class SmoAnalyser {
     private buildSmoAnalyseModel(buildParams: ISmoBuildAnalyseModelParams): ISmoAnalyseModel {
         const { smo, visit, isVisited } = buildParams;
         const currState = smo.getState();
-        console.log('build: ' + currState);
         if (!isVisited(currState)) {
-            console.log('visit: ' + currState);
             visit(currState);
         }
         return {
@@ -39,7 +37,6 @@ export class SmoAnalyser {
     }
 
     private getNotVisitedState(state: string, buildParams: ISmoBuildAnalyseModelParams): ISmoAnalyseModel {
-        console.log('not visited: ' + state);
         const copySmo = buildParams.smo.getCopy();
         copySmo.setState(state);
         buildParams.smo = copySmo;

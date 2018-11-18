@@ -15,5 +15,6 @@ export const SaimmConstants = {
     DEFAULT_EXPONENTIAL_LAMBDA: 0.5,
     DEFAULT_GAMMA_LAMBDA: 0.5,
     DEFAULT_GAMMA_N: 1,
-    DEFAULT_TRIANGLE_MODE: TriangleDistributionModes.LOW_TO_HIGH
+    DEFAULT_TRIANGLE_MODE: TriangleDistributionModes.LOW_TO_HIGH,
+    DEFAULT_D3_SELECTOR: '#smoSvg',
 };

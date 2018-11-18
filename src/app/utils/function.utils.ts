@@ -4,15 +4,15 @@ import { Injectable } from "@angular/core";
     providedIn: 'root'
 })
 export class FunctionUtils {
-    getFunctionFromVariableOrFunction(vOrFn: any) {
-        let fn = null;
-        if (vOrFn) {
-            fn = typeof vOrFn === 'function'
-                ? vOrFn
-                : () => vOrFn;
-        } else {
-            fn = () => null;
-        }
-        return fn;
+    getFunctionFromVariableOrFunction(vOrFn: any): any {
+        return this.isFunction(vOrFn) ? vOrFn : () => vOrFn;
+    }
+
+    getValueFromValueOrFunction(vOrFn: any): any {
+        return this.isFunction(vOrFn) ? vOrFn() : vOrFn;
+    }
+
+    isFunction(vOrFn: any) {
+        return typeof vOrFn === 'function';
     }
 }

@@ -14,6 +14,7 @@ import { SaimmRoutingModule } from './saimm-routing.module';
 import { SaimmComponent } from './saimm.component';
 import { Kr1Component } from './kr1/kr1.component';
 import { SmoService } from './kr1/smo.service';
+import { SaimmConstants } from './saimm.constants';
 
 @NgModule({
   imports: [
@@ -35,6 +36,9 @@ import { SmoService } from './kr1/smo.service';
     DistributionComponent,
     Kr1Component
   ],
-  providers: [DistributionService, SmoService]
+  providers: [DistributionService, SmoService, {
+    provide: 'd3Selector',
+    useValue: SaimmConstants.DEFAULT_D3_SELECTOR
+  }]
 })
 export class SaimmModule { }

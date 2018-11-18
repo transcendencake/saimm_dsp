@@ -1,0 +1,11 @@
+#smoSvg:hover {
+
+    line.connection {
+        opacity: 0.5;
+    }
+
+    line.connection:hover {
+        cursor: pointer;
+        opacity: 1;
+    }
+}

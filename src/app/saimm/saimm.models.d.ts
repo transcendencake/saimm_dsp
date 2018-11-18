@@ -80,4 +80,59 @@ interface IDrawnState {
 interface IConnectionState {
     from: string;
     to: string;
+    color: string;
+    fromX: number;
+    fromY: number;
+    toX: number;
+    toY: number;
+}
+
+interface IHtmlElementAttributes {
+    class?: string;
+}
+
+interface ID3SvgCircle extends IHtmlElementAttributes {
+    cx: number;
+    cy: number;
+    r: number;
+    fill?: string;
+}
+
+interface ID3SvgLine extends IHtmlElementAttributes {
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+    stroke?: string;
+    strokeWidth?: string;
+}
+
+interface ID3SvgRectangle extends IHtmlElementAttributes {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    stroke?: string;
+    strokeWidth?: string;
+    fill?: string;
+}
+
+interface ID3SvgText extends IHtmlElementAttributes {
+    x: number;
+    y: number;
+    textAnchor: string;
+}
+
+interface ID3SvgElement<T> {
+    selector: string;
+    element: string;
+    attributes?: T;
+    text?: string;
+    title?: string;
+}
+
+interface ID3DrawerDefaults {
+    stroke?: string | (() => string);
+    strokeWidth?: number | (() => number);
+    fill?: string | (() => string);
 }

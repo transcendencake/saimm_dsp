@@ -8,6 +8,8 @@ import { MenuService } from './services/menu.service';
 import { ArrayUtils } from './utils/array.utils';
 import { FunctionUtils } from './utils/function.utils';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StringUtils } from './utils/string.utils';
+import { D3Utils } from './utils/d3.utils';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule,
     AppRoutingModule
   ],
-  providers: [MenuService, ArrayUtils, FunctionUtils],
+  providers: [MenuService, ArrayUtils, FunctionUtils, StringUtils, D3Utils],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
