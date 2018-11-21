@@ -17,4 +17,6 @@ export const SaimmConstants = {
     DEFAULT_GAMMA_N: 1,
     DEFAULT_TRIANGLE_MODE: TriangleDistributionModes.LOW_TO_HIGH,
     DEFAULT_D3_SELECTOR: '#smoSvg',
+    ACTIVE_STATE_FILL: '#f2f2f2',
+    NOT_ACTIVE_STATE_FILL: 'white'
 };

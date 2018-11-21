@@ -35,6 +35,8 @@ interface ITriangleDistributionSettings extends IDistributionSettingsBase {
 
 interface ISmo {
     getState(): string;
+    tick(): void;
+    getStateDescriptor(): IStateDescriptor;
     getPossibleStates(): string[];
     setState(state: string);
     getCopy(): ISmo;
@@ -42,6 +44,17 @@ interface ISmo {
 
 interface ISmoDrawer {
     drawSmoGraph(graph: ISmoGraph): void;
+    setActiveState(state: string): void;
+    removeActiveState(state: string): void;
+}
+
+interface IStateDescriptor {
+    state: string;
+    prevState: string;
+    explanation: string;
+    amountInSystem: number;
+    createdId: number;
+    destroyedIds: number[];
 }
 
 interface IPossible<TValue> {
@@ -49,10 +62,20 @@ interface IPossible<TValue> {
     value: TValue;
 }
 
+interface INextSmoState {
+    description: string;
+    state: string;
+}
+
 interface ISmoNode {
     value: number;
+    prevValue: number;
+    requestId: number;
+    prevRequestId: number;
+    destroyedId: number;
     getPossibleNextValues(): number[];
     getNextValue(): number;
+    getExplanation(): string;
 }
 
 interface ISmoAnalyseModel {
@@ -135,4 +158,10 @@ interface ID3DrawerDefaults {
     stroke?: string | (() => string);
     strokeWidth?: number | (() => number);
     fill?: string | (() => string);
+}
+
+interface ISmoRequest {
+    id: number;
+    lifeTime: number; 
+    isHandled: boolean;
 }

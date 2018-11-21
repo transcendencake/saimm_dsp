@@ -11,7 +11,7 @@ export class SmoDrawer implements ISmoDrawer {
     private connectionColorsProvider = new ColorsProvider();
     private d3Drawer: D3Drawer;
 
-    constructor(d3Utils: D3Utils) {
+    constructor(private d3Utils: D3Utils) {
         this.d3Drawer = new D3Drawer({
             selector: SaimmConstants.DEFAULT_D3_SELECTOR,
             d3Utils: d3Utils,
@@ -50,6 +50,26 @@ export class SmoDrawer implements ISmoDrawer {
         this.drawConnections(smoGraph.tree);
     }
 
+    public removeActiveState(state: string): void {
+        const svgElementClass = this.getStateSvgClass(state);
+        const el = this.d3Utils.selectElement('.' + svgElementClass);
+        this.d3Utils.setAttributes(el, {
+            fill: SaimmConstants.NOT_ACTIVE_STATE_FILL
+        });
+    }
+
+    public setActiveState(state: string): void {
+        const svgElementClass = this.getStateSvgClass(state);
+        const el = this.d3Utils.selectElement('.' + svgElementClass);
+        this.d3Utils.setAttributes(el, {
+            fill: SaimmConstants.ACTIVE_STATE_FILL
+        });
+    }
+
+    private getStateSvgClass(state: string) {
+        return 'state' + state;
+    }
+
     private drawState(state: string, drawOrder: number) {
         const itemDrawn = this.drawnStates[state] != null;
         if (!itemDrawn) {
@@ -60,8 +80,9 @@ export class SmoDrawer implements ISmoDrawer {
                 y,
                 width: this.stateBlockWidth,
                 height: this.stateBlockHeight,
-                fill: 'white',
-                stroke: 'black'
+                fill: SaimmConstants.NOT_ACTIVE_STATE_FILL,
+                stroke: 'black',
+                class: this.getStateSvgClass(state)
             });
             this.d3Drawer.drawText({
                 textAnchor: 'middle',
@@ -108,7 +129,7 @@ export class SmoDrawer implements ISmoDrawer {
             const xEndIn = xEndOut;
             const yEndIn = yStartIn;
 
-            const title= `from ${stateFrom} to ${stateTo}`;
+            const title = `from ${stateFrom} to ${stateTo}`;
             this.d3Drawer.drawLine({
                 x1: xStartOut,
                 y1: yStartOut,

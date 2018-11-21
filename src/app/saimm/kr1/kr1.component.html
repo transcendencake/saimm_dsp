@@ -18,5 +18,104 @@
 <section>
   <h3 class="h2 font-weight-bold">Решение</h3>
   <p>Зашифруем состояния 3х-компонентным вектором: t1 j t2</p>
-  <svg id="smoSvg" width="600" height="1500" style="border: 1px black solid"></svg>
+  <div class="d-flex">
+    <svg id="smoSvg"
+      width="600"
+      height="1500"
+      style="border: 1px black solid"></svg>
+    <div class="smo-desc">
+      <h4>
+        СМО
+      </h4>
+      <div>
+        <mat-form-field style="margin-right: 0.5em">
+          <input matInput
+            type="number"
+            [(ngModel)]="ticksAmount"
+            placeholder="amout">
+        </mat-form-field>
+        <button mat-button
+          mat-raised-button
+          style="margin-bottom: 0.5em; margin-right: 0.5em"
+          color="primary"
+          [disabled]="tickStarted == true"
+          (click)="onCountAmountClick()">
+          Посчитать количество
+        </button>
+        <button mat-button
+          mat-raised-button
+          color="primary"
+          [disabled]="tickStarted == true"
+          (click)="reset()">
+          Сбросить
+        </button>
+        <br>
+        <button mat-button
+          mat-raised-button
+          color="primary"
+          [disabled]="tickStarted == true"
+          (click)="onTickClick()">
+          Такт
+        </button>
+        <button mat-button
+          mat-raised-button
+          color="primary"
+          [disabled]="tickStarted == true"
+          (click)="onStartTicksClick()">
+          Старт
+        </button>
+        <button mat-button
+          mat-raised-button
+          color="primary"
+          [disabled]="tickStarted == false"
+          (click)="onStopTicksClick()">
+          Стоп
+        </button>
+      </div>
+      <div class="desc">
+        <div class="item">
+          <label for="">
+            Исходное состояние
+          </label>
+          <span>{{prevSmoState}} </span>
+        </div>
+        <div class="item">
+          <label for="">
+            Конечное состояние
+          </label>
+          {{currSmoState}}
+        </div>
+        <div class="item">
+          <label for="">
+            Описание состояния
+          </label>
+          {{currDescription}}
+        </div>
+        <div class="item">
+          <label for="">
+            Описание перехода
+          </label>
+          {{tickDescription}}
+        </div>
+        <div class="item">
+          <label for="">
+            Абсолютная пропускная способность
+          </label>
+          {{aw}}
+        </div>
+        <div class="item">
+          <label for="">
+            Ср. время заявки в системе
+          </label>
+          {{wc}}
+        </div>
+        <div class="item">
+          <label for="">
+            Ср. число заявок в системе
+          </label>
+          {{lc}}
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

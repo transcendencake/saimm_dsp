@@ -18,7 +18,7 @@ export class D3Utils {
         const svgEl = this.selectElement(selector)
             .append(element);
         if (attributes) {
-            this.addAttributes(svgEl, attributes)
+            this.setAttributes(svgEl, attributes)
         }
         if(text) {
             this.addText(svgEl, text);
@@ -33,7 +33,7 @@ export class D3Utils {
         return d3.select(selector);
     }
 
-    addAttributes<T>(d3SvgElement: D3Select, attributes: T): void {
+    setAttributes<T>(d3SvgElement: D3Select, attributes: T): void {
         forOwn(attributes, (value, key) =>
             d3SvgElement.attr(
                 this.stringUtils.replaceUppercaseWithDashFollowedByLowerCase(key),

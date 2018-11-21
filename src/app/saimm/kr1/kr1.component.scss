@@ -4,8 +4,25 @@
         opacity: 0.5;
     }
 
+    rect:hover {
+        opacity: 0.5;
+    }
+
     line.connection:hover {
         cursor: pointer;
         opacity: 1;
+    }
+}
+
+.smo-desc {
+    width: 335px;
+    margin-left: 1em;
+    .desc {
+        .item {
+            label {
+                padding-right: 0.5em;
+                font-weight: bold;
+            }
+        }
     }
 }
