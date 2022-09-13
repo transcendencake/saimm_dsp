@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { debounce } from 'lodash';
-
-type ChartType = 'bar';
+import { DistributionService } from '../lab2/distributions/distribution.service';
 
 interface ILemmRandomDebugInfo {
   n: number;
@@ -27,26 +26,6 @@ interface IRandomNumberProperties {
   aperiodichnost_length: number;
 }
 
-interface IBarChart {
-  type: ChartType;
-  datasets: [
-    {
-      label: string;
-      data: number[];
-    }
-  ];
-  options: {
-    legend: {
-      display: boolean;
-    }
-    title: {
-      display: boolean;
-      text: string;
-    }
-  };
-  labels: string[];
-}
-
 interface IKosvenniePriznaki {
   otnositelnayaChastotaPopadaniya: number;
   pNa4: number;
@@ -57,31 +36,13 @@ interface IKosvenniePriznaki {
   templateUrl: './lab1.component.html'
 })
 export class Lab1Component implements OnInit {
+  gistogramData: IGistogramData[];
   lemmInput: ILemmInput = {
     a: 3,
     m: 5,
     r0: 1,
     amount: 5,
-    bigAmount: 250000
-  };
-  barChart: IBarChart = {
-    datasets: [
-      {
-        data: [],
-        label: 'Чисел в интервале'
-      }
-    ],
-    options: {
-      legend: {
-        display: true
-      },
-      title: {
-        display: true,
-        text: 'Гистограмма'
-      }
-    },
-    labels: [],
-    type: 'bar'
+    bigAmount: 25000
   };
   randomProperties: IRandomNumberProperties = {} as IRandomNumberProperties;
   lemmRandomDebugInfo: ILemmRandomDebugInfo[] = [];
@@ -90,7 +51,7 @@ export class Lab1Component implements OnInit {
     pNa4: Math.PI / 4
   };
 
-  constructor() {
+  constructor(private distributionService: DistributionService) {
     this.onLemmInputChange = debounce(this.onLemmInputChange.bind(this), 500);
   }
 
@@ -124,11 +85,7 @@ export class Lab1Component implements OnInit {
     const nums = lemms.map(lem => lem.x_curr);
     this.lemmRandomDebugInfo = this.getLemms(a, m, r0, amount);
     const t3 = performance.now();
-    this.barChart.datasets[0].data = this.getDataForGistogramm(20, nums);
-    this.barChart.labels = [];
-    for (let i = 0; i < this.barChart.datasets[0].data.length; ++i) {
-      this.barChart.labels.push((i + 1).toString());
-    }
+    this.gistogramData = this.distributionService.getGistogramData(nums);
     const t4 = performance.now();
     console.log('Time for generating gistogram data: ' + (t4 - t3));
     this.randomProperties = this.getRandomProperties(nums);
@@ -138,20 +95,11 @@ export class Lab1Component implements OnInit {
   getOtnositelnayaChastotaPopadaniya(nums: number[]): number {
     let k = 0;
     for (let i = 0; i < nums.length; i += 2) {
-      if (Math.pow(nums[i], 2) + Math.pow(nums[i + 1], 2) < 1) {
+      if (Math.pow(nums[i], 2) + Math.pow(nums[i !== nums.length ? i + 1 : i], 2) < 1) {
         ++k;
       }
     }
     return (2 * k) / nums.length;
-  }
-
-  getDataForGistogramm(intervalsAmount: number, nums: number[]): number[] {
-    const step = 1 / intervalsAmount;
-    const res: number[] = [];
-    for (let i = 0; i < 1; i += step) {
-      res.push(nums.filter(num => num >= i && num < i + step).length);
-    }
-    return res;
   }
 
   getRandomProperties(nums: number[]): IRandomNumberProperties {

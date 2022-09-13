@@ -9,7 +9,7 @@
   <h4 class="h5 font-weight-bold">Ввод исходных данных</h4>
   <form class="d-flex justify-content-between">
     <div class="md-form">
-      <input 
+      <input
         type="text"
         name="a"
         [(ngModel)]="lemmInput.a"
@@ -85,11 +85,7 @@
   <h4 class="h5 font-weight-bold">Гистограмма для {{lemmInput.bigAmount}} чисел, полагая в качестве исходных: <i>a={{lemmInput.a}},
       m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
   <div>
-    <canvas baseChart
-      [chartType]="barChart.type"
-      [datasets]="barChart.datasets"
-      [labels]="barChart.labels">
-    </canvas>
+    <app-gistogram [data]="gistogramData"></app-gistogram>
   </div>
   <h4 class="h5 font-weight-bold">Оценки для распределения для {{lemmInput.bigAmount}} чисел, полагая в качестве
     исходных: <i>a={{lemmInput.a}},
