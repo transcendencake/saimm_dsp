@@ -7,8 +7,9 @@ import { Kr1Component } from './kr1/kr1.component';
 const routes: Routes = [
   { path: '', redirectTo: 'lab1', pathMatch: 'full' },
   { path: 'lab1', component: Lab1Component },
-  { path: 'lab2', component: Lab2Component },
-  { path: 'kr1', component: Kr1Component }
+  { path: 'lab2', component: Lab2Component }
+  // ,
+  // { path: 'kr1', component: Kr1Component }
 ];
 
 @NgModule({

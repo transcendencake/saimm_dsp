@@ -4,7 +4,7 @@ import { debounce } from 'lodash';
 type ChartType = 'bar';
 
 interface ILemmRandomDebugInfo {
-  n: number,
+  n: number;
   r_prev: number;
   a_r_prev: number;
   r_curr: number;
@@ -43,7 +43,7 @@ interface IBarChart {
       display: boolean;
       text: string;
     }
-  },
+  };
   labels: string[];
 }
 
@@ -54,8 +54,7 @@ interface IKosvenniePriznaki {
 
 @Component({
   selector: 'app-lab1',
-  templateUrl: './lab1.component.html',
-  styleUrls: ['./lab1.component.scss']
+  templateUrl: './lab1.component.html'
 })
 export class Lab1Component implements OnInit {
   lemmInput: ILemmInput = {
@@ -89,7 +88,7 @@ export class Lab1Component implements OnInit {
   kosvenniePriznaki: IKosvenniePriznaki = {
     otnositelnayaChastotaPopadaniya: null,
     pNa4: Math.PI / 4
-  }
+  };
 
   constructor() {
     this.onLemmInputChange = debounce(this.onLemmInputChange.bind(this), 500);
@@ -118,19 +117,19 @@ export class Lab1Component implements OnInit {
     if (!a || !m || !r0) {
       return;
     }
-    var t0 = performance.now();
+    const t0 = performance.now();
     const lemms = this.getLemms(a, m, r0, bigAmount);
-    var t1 = performance.now();
+    const t1 = performance.now();
     console.log('Time for generating 50000 numbers: ' + (t1 - t0));
     const nums = lemms.map(lem => lem.x_curr);
     this.lemmRandomDebugInfo = this.getLemms(a, m, r0, amount);
-    var t3 = performance.now();
-    this.barChart.datasets[0].data = this.getDataForGistogramm(20, nums)
+    const t3 = performance.now();
+    this.barChart.datasets[0].data = this.getDataForGistogramm(20, nums);
     this.barChart.labels = [];
     for (let i = 0; i < this.barChart.datasets[0].data.length; ++i) {
       this.barChart.labels.push((i + 1).toString());
     }
-    var t4 = performance.now();
+    const t4 = performance.now();
     console.log('Time for generating gistogram data: ' + (t4 - t3));
     this.randomProperties = this.getRandomProperties(nums);
     this.kosvenniePriznaki.otnositelnayaChastotaPopadaniya = this.getOtnositelnayaChastotaPopadaniya(nums);
@@ -191,7 +190,7 @@ export class Lab1Component implements OnInit {
       }
     }
     if (i3 === null) {
-      throw 'Unknown error, i3 should not be null';
+      throw new Error('Unknown error, i3 should not be null');
     }
     return i3 + periodLength;
   }
@@ -202,7 +201,7 @@ export class Lab1Component implements OnInit {
     let i1: number = null;
     let i2: number = null;
     for (let i = 0; i < nums.length; ++i) {
-      if (nums[i] == xv) {
+      if (nums[i] === xv) {
         if (i1 == null) {
           i1 = i;
         } else {
@@ -212,7 +211,7 @@ export class Lab1Component implements OnInit {
       }
     }
     if (i2 == null || i1 == null) {
-      throw 'Unknown error, neither i1 or i2 should not be null'
+      throw new Error('Unknown error, neither i1 or i2 should not be null');
     }
     return i2 - i1;
   }

@@ -21,8 +21,7 @@ interface ILabDistributions {
 
 @Component({
   selector: 'app-lab2',
-  templateUrl: './lab2.component.html',
-  styleUrls: ['./lab2.component.scss']
+  templateUrl: './lab2.component.html'
 })
 export class Lab2Component implements OnInit {
 
@@ -92,7 +91,7 @@ export class Lab2Component implements OnInit {
   updatedGaussinDistribution(): void {
     const { amount, m, d, randAmount } = this.distributions.gaussian.settings;
 
-    let randomArrays: number[][] = [];
+    const randomArrays: number[][] = [];
     for (let i = 0; i < randAmount; ++i) {
       randomArrays.push(this.distributionService.getRandomNumbers(amount));
     }

@@ -21,6 +21,6 @@ export class GistogramComponent {
   }
 
   private getLabel(min: number, max: number): string {
-    return `[${min.toFixed(2)}, ${max.toFixed(2)})`
+    return `[${min.toFixed(2)}, ${max.toFixed(2)})`;
   }
 }

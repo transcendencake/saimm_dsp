@@ -1,5 +1,5 @@
-import { D3Utils } from "../utils/d3.utils";
-import { D3SvgElements, D3DefaultAttributes } from "../app.constants";
+import { D3Utils } from '../utils/d3.utils';
+import { D3SvgElements, D3DefaultAttributes } from '../app.constants';
 
 import { assign } from 'lodash';
 
@@ -14,7 +14,7 @@ interface ID3DrawerDrawArgs<T> {
 interface ID3DrawerConstructor {
     selector: string;
     d3Utils: D3Utils;
-    defaults?: ID3DrawerDefaults
+    defaults?: ID3DrawerDefaults;
 }
 
 export class D3Drawer {
@@ -83,8 +83,8 @@ export class D3Drawer {
     private getAttributes<T>(attributes: T,  defaultsKeys: string[]): T {
         const defaultAttributes = {};
         defaultsKeys.forEach(key => {
-            defaultAttributes[key] = this.defaults[key]
+            defaultAttributes[key] = this.defaults[key];
         });
-        return assign<T>(defaultAttributes, attributes)
+        return assign<T>(defaultAttributes, attributes);
     }
 }

@@ -1,8 +1,8 @@
-import { SmoDrawer } from "./smo-drawer.class";
-import { SmoClass } from "./smo.class";
-import { SmoAnalyser } from "./smo-analyser.class";
-import { Injectable } from "@angular/core";
-import { D3Utils } from "src/app/utils/d3.utils";
+import { SmoDrawer } from './smo-drawer.class';
+import { SmoClass } from './smo.class';
+import { SmoAnalyser } from './smo-analyser.class';
+import { Injectable } from '@angular/core';
+import { D3Utils } from 'src/app/utils/d3.utils';
 
 @Injectable()
 export class SmoService {

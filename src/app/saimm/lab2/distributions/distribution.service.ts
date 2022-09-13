@@ -1,6 +1,6 @@
-import { SaimmConstants } from "../../saimm.constants";
-import { ArrayUtils } from "src/app/utils/array.utils";
-import { Injectable } from "@angular/core";
+import { SaimmConstants } from '../../saimm.constants';
+import { ArrayUtils } from 'src/app/utils/array.utils';
+import { Injectable } from '@angular/core';
 import { max, min } from 'lodash';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class DistributionService {
             amount: SaimmConstants.DEFAULT_DISTRUBUTION_SIZE,
             start: SaimmConstants.DEFAULT_DISTRUBUTION_START,
             end: SaimmConstants.DEFAULT_DISTRUBUTION_END
-        }
+        };
     }
 
     getRandomNumbers(amount: number): number[] {
@@ -50,7 +50,7 @@ export class DistributionService {
         return {
             ...this.getDistributionSettingsBase(),
             mode: SaimmConstants.DEFAULT_TRIANGLE_MODE
-        }
+        };
     }
 
     getGistogramData(nums: number[], intervalAmount?: number): IGistogramData[] {

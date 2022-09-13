@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuService } from './services/menu.service';
@@ -13,8 +12,7 @@ import { D3Utils } from './utils/d3.utils';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AboutComponent
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,

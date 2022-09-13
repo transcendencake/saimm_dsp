@@ -3,18 +3,17 @@ import { SaimmConstants } from '../../saimm.constants';
 
 @Component({
   selector: 'app-big-array',
-  templateUrl: './big-array.component.html',
-  styleUrls: ['./big-array.component.scss']
+  templateUrl: './big-array.component.html'
 })
 export class BigArrayComponent {
   @Input() step: number = SaimmConstants.DEFAULT_BIG_ARRAY_STEP;
-  @Input() title: string = 'Просмотр сгенерированных значений случайной величины';
+  @Input() title = 'Просмотр сгенерированных значений случайной величины';
   @Input() set array(items: number[]) {
     if (items) {
       this.items = items;
       this.displayedItems = items.slice(0, this.displayedItems.length);
     }
-  };
+  }
   @Output() stepChange: EventEmitter<number> = new EventEmitter<number>();
   displayedItems: number[] = [];
   items: number[] = [];
