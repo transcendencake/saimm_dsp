@@ -1,52 +1,51 @@
 <section>
   <h2 class="h1 py-3 font-weight-bold">Лабораторная работа 1</h2>
-  <h3 class="h2 font-weight-bold">Часть 1. Условие</h3>
+  <h3 class="h2 font-weight-bold">Задание 1</h3>
   <p class="mb-2 pb-3 lead ">
     Построить (написать программу) генератор последовательности равномерно распределенных случайных чисел на основе
     алгоритма Лемера. Предусмотреть при этом возможность ввода параметров a, R0, m с клавиатуры.
   </p>
-  <h3 class="h3 font-weight-bold">Часть 1. Решение</h3>
   <h4 class="h5 font-weight-bold">Ввод исходных данных</h4>
   <form class="d-flex justify-content-between">
     <div class="md-form">
       <input
-        type="text"
+        type="number"
         name="a"
+        id="a-1"
         [(ngModel)]="lemmInput.a"
         (ngModelChange)="onLemmInputChange()"
         class="form-control">
-      <label for="a"
-        [class.active]="lemmInput.a != null"
+      <label for="a-1"
+        [class.active]="lemmInput.a"
         class="">Введите a</label>
     </div>
     <div class="md-form">
       <input mdbInputDirective
-        type="text"
+        type="number"
         name="m"
         [(ngModel)]="lemmInput.m"
         (ngModelChange)="onLemmInputChange()"
-        id="m"
+        id="m_1"
         class="form-control">
-      <label for="m"
+      <label for="m_1"
         [class.active]="lemmInput.m != null"
         class="">Введите m</label>
     </div>
     <div class="md-form">
       <input mdbInputDirective
-        type="text"
+        type="number"
         name="r0"
         [(ngModel)]="lemmInput.r0"
         (ngModelChange)="onLemmInputChange()"
-        id="r0"
+        id="r0_1"
         class="form-control">
-      <label for="r0"
+      <label for="r0_1"
         [class.active]="lemmInput.r0 != null"
-        class="">Введите R0</label>
+        class="">Введите R<sub>0</sub></label>
     </div>
   </form>
   <div *ngIf="lemmRandomDebugInfo.length > 0">
-    <h4 class="h5 font-weight-bold">Иллюстрация работы алгоритма для первых {{lemmInput.amount}} чисел, полагая в
-      качестве исходных: <i>a={{lemmInput.a}}, m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
+    <h4 class="h5 font-weight-bold">Результат работы алгоритма для первых {{lemmInput.amount}} чисел при: <i>a={{lemmInput.a}}, m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
     <div class="my-3 d-flex flex-column">
       <div class="gray d-flex justify-content-between">
         <div class="w-20 flex-grow-0 flex-shrink-0 n font-weight-bold">N</div>
@@ -67,45 +66,45 @@
     </div>
   </div>
   <div class="actions">
-    <button class="btn btn-primary"
-      (click)="add5()">Add 5 digits</button>
-    <button [disabled]="lemmRandomDebugInfo.length === 5"
-      class="btn btn-primary"
-      (click)="remove5()">Remove 5 digits</button>
+    <button mat-button
+            mat-raised-button
+            color="primary"
+            class="mr-2"
+            (click)="add5()">Добавить 5</button>
+    <button mat-button
+            mat-raised-button
+            color="primary"
+            [disabled]="lemmRandomDebugInfo.length === 5"
+            (click)="remove5()">Убрать 5</button>
   </div>
 </section>
 <hr class="mb-3">
 <section class="part2 lightgrey">
-  <h3 class="h2 font-weight-bold">Часть 2. Условие</h3>
+  <h3 class="h2 font-weight-bold">Задание 2</h3>
   <p class="mb-2 pb-3 lead ">
     Для полученной выборки чисел построить гистограмму (20 интервалов), рассчитать значения оценок для математического
-    ожидания M, дисперсии D и среднего квадратичного отклонении (σ ̃ ).
+    ожидания, дисперсии и среднего квадратичного отклонении.
   </p>
-  <h3 class="h2 font-weight-bold">Часть 2. Решение</h3>
-  <h4 class="h5 font-weight-bold">Гистограмма для {{lemmInput.bigAmount}} чисел, полагая в качестве исходных: <i>a={{lemmInput.a}},
+  <h4 class="h5 font-weight-bold">Гистограмма для {{lemmInput.bigAmount}} чисел при: <i>a={{lemmInput.a}},
       m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
   <div>
     <app-gistogram [data]="gistogramData"></app-gistogram>
   </div>
-  <h4 class="h5 font-weight-bold">Оценки для распределения для {{lemmInput.bigAmount}} чисел, полагая в качестве
-    исходных: <i>a={{lemmInput.a}},
+  <h4 class="h5 font-weight-bold">Оценки распределения для {{lemmInput.bigAmount}} чисел при: <i>a={{lemmInput.a}},
       m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
   <div>
-    <div><span class="font-weight-bold">Математическое ожидание: </span> {{ randomProperties.M }}</div>
+    <div><span class="font-weight-bold">Мат. ожидание: </span> {{ randomProperties.M }}</div>
     <div><span class="font-weight-bold">Дисперсия: </span> {{ randomProperties.D }}</div>
-    <div><span class="font-weight-bold">Среднее Квадратичное Отклонение: </span> {{ randomProperties.SKO }}</div>
+    <div><span class="font-weight-bold">СКО: </span> {{ randomProperties.SKO }}</div>
   </div>
 </section>
 <hr class="mb-3">
 <section class="part3">
-  <h3 class="h2 font-weight-bold">Часть 3. Условие</h3>
+  <h3 class="h2 font-weight-bold">Задание 3</h3>
   <p class="mb-2 lead">
-    Оценить равномерность последовательности по косвенным признакам.
+    Оценить равномерность последовательности по косвенным признакам (рассчитать относительную частоту попадания точек в круг).
   </p>
-  <h3 class="h2 font-weight-bold">Часть 3. Решение</h3>
   <div>
-    <p class="lead">Суть метода сводится к тому, чтобы рассчитать относительную частоту попадания точек в круг. Если числа
-      равномерны, полученное числе должно стремится к значениею P/4.</p>
     <div><span class="font-weight-bold">Относительная частота: </span> {{
       kosvenniePriznaki.otnositelnayaChastotaPopadaniya }}</div>
     <div><span class="font-weight-bold">P/4: </span> {{ kosvenniePriznaki.pNa4 }}</div>
@@ -113,18 +112,18 @@
 </section>
 <hr class="mb-3">
 <section class="part4">
-  <h3 class="h2 font-weight-bold">Часть 4. Условие</h3>
+  <h3 class="h2 font-weight-bold">Задание 4</h3>
   <p class="mb-2 pb-3 lead ">
     Найти длину периода и участка апериодичности. Варьируя значениями параметров a, R0, m, добиться длины периода не
-    менее 50000 чисел.
+    менее 100000 чисел.
   </p>
-  <h3 class="h2 font-weight-bold">Часть 4. Решение</h3>
-  <h4 class="h5 font-weight-bold">Ввод исходных данных(рекомендуемые a=333, m=9999999, R<sub>0</sub>=1)</h4>
+  <h4 class="h5 font-weight-bold">Ввод исходных данных (рекомендуемые a=2147483641, m=4294967295, R<sub>0</sub>=20004979)</h4>
   <form class="d-flex justify-content-between">
     <div class="md-form">
       <input mdbInputDirective
-        type="text"
+        type="number"
         name="a"
+        id="a"
         [(ngModel)]="lemmInput.a"
         (ngModelChange)="onLemmInputChange()"
         class="form-control">
@@ -134,7 +133,7 @@
     </div>
     <div class="md-form">
       <input mdbInputDirective
-        type="text"
+        type="number"
         name="m"
         [(ngModel)]="lemmInput.m"
         (ngModelChange)="onLemmInputChange()"
@@ -146,7 +145,7 @@
     </div>
     <div class="md-form">
       <input mdbInputDirective
-        type="text"
+        type="number"
         name="r0"
         [(ngModel)]="lemmInput.r0"
         (ngModelChange)="onLemmInputChange()"
@@ -154,7 +153,7 @@
         class="form-control">
       <label for="r0"
         [class.active]="lemmInput.r0 != null"
-        class="">Введите R0</label>
+        class="">Введите R<sub>0</sub></label>
     </div>
   </form>
   <div>
@@ -163,8 +162,7 @@
       }}</div>
   </div>
   <div *ngIf="lemmRandomDebugInfo.length > 0">
-    <h4 class="h5 font-weight-bold">Иллюстрация работы алгоритма для первых {{lemmInput.amount}} чисел, полагая в
-      качестве исходных: <i>a={{lemmInput.a}}, m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
+    <h4 class="h5 font-weight-bold">Результат работы алгоритма для первых {{lemmInput.amount}} чисел при: <i>a={{lemmInput.a}}, m={{lemmInput.m}}, R<sub>0</sub>={{lemmInput.r0}}</i></h4>
     <div class="my-3 d-flex flex-column">
       <div class="gray d-flex justify-content-between">
         <div class="w-20 flex-grow-0 flex-shrink-0 n font-weight-bold">N</div>
@@ -185,10 +183,15 @@
     </div>
   </div>
   <div class="actions">
-    <button class="btn btn-primary"
-      (click)="add5()">Add 5 digits</button>
-    <button [disabled]="lemmRandomDebugInfo.length === 5"
-      class="btn btn-primary"
-      (click)="remove5()">Remove 5 digits</button>
+    <button mat-button
+            mat-raised-button
+            color="primary"
+            class="mr-2"
+            (click)="add5()">Добавить 5</button>
+    <button mat-button
+            mat-raised-button
+            color="primary"
+            [disabled]="lemmRandomDebugInfo.length === 5"
+            (click)="remove5()">Убрать 5</button>
   </div>
 </section>

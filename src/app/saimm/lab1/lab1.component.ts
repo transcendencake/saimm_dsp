@@ -42,7 +42,7 @@ export class Lab1Component implements OnInit {
     m: 5,
     r0: 1,
     amount: 5,
-    bigAmount: 25000
+    bigAmount: 250000
   };
   randomProperties: IRandomNumberProperties = {} as IRandomNumberProperties;
   lemmRandomDebugInfo: ILemmRandomDebugInfo[] = [];
@@ -103,30 +103,16 @@ export class Lab1Component implements OnInit {
   }
 
   getRandomProperties(nums: number[]): IRandomNumberProperties {
-    const M = this.getM(nums);
-    const D = this.getD(nums, M);
+    const M = this.distributionService.getM(nums);
+    const D = this.distributionService.getD(nums, M);
     const period_length = this.getPeriodLength(nums);
     return {
       aperiodichnost_length: this.getAperiodichnostLength(nums, period_length),
       D,
       M,
       period_length,
-      SKO: this.getSKO(D)
+      SKO: this.distributionService.getSKO(D)
     };
-  }
-
-  getM(nums: number[]): number {
-    const summ = nums.reduce((prev, curr) => prev + curr, 0);
-    return summ / nums.length;
-  }
-
-  getD(nums: number[], m: number): number {
-    const summ = nums.reduce((prev, curr) => prev + Math.pow((curr - m), 2), 0);
-    return summ / nums.length;
-  }
-
-  getSKO(d: number): number {
-    return Math.sqrt(d);
   }
 
   getAperiodichnostLength(nums: number[], periodLength: number): number {

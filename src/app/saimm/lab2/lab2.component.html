@@ -4,13 +4,12 @@
         mat-raised-button
         class="mr-2"
         (click)="matAccordion.openAll()"
-        color="primary">Развернуть все панели</button>
+        color="primary">Развернуть всё</button>
     <button mat-button
         mat-raised-button
         class="mr-2"
         (click)="matAccordion.closeAll()"
-        color="primary">Свернуть все панели</button>
-    <p class="note">Сворачивание панелей занимает несколько секунд</p>
+        color="primary">Свернуть всё</button>
 </div>
 <mat-accordion #matAccordion="matAccordion"
     mat-accordion
@@ -22,7 +21,8 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-distribution [distribution]="distributions.uniform.distribution">
-            <p class="font-weight-bold">Входные параметры распределения</p>
+          <img src="assets/uniform_distribution.png">
+          <p class="font-weight-bold">Входные параметры распределения</p>
             <mat-form-field class="mr-2">
                 <input matInput
                     type="number"
@@ -45,7 +45,7 @@
                 <button mat-button
                     mat-raised-button
                     color="primary"
-                    (click)="updateUniformDistribution()">Сгенерировать нормальное распределение</button>
+                    (click)="updateUniformDistribution()">Сгенерировать</button>
             </p>
             <hr>
         </app-distribution>
@@ -57,7 +57,8 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-distribution [distribution]="distributions.gaussian.distribution">
-            <p class="font-weight-bold">Входные параметры распределения</p>
+          <img src="assets/gaussian_distribution.png">
+          <p class="font-weight-bold">Входные параметры распределения</p>
             <mat-form-field class="mr-2">
                 <input matInput
                     type="number"
@@ -86,7 +87,7 @@
                 <button mat-button
                     mat-raised-button
                     color="primary"
-                    (click)="updatedGaussinDistribution()">Сгенерировать гауссовское распределение</button>
+                    (click)="updatedGaussinDistribution()">Сгенерировать</button>
             </p>
             <hr>
         </app-distribution>
@@ -98,7 +99,8 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-distribution [distribution]="distributions.exponential.distribution">
-            <p class="font-weight-bold">Входные параметры распределения</p>
+          <img src="assets/exponential_distribution.png">
+          <p class="font-weight-bold">Входные параметры распределения</p>
             <mat-form-field class="mr-2">
                 <input matInput
                     type="number"
@@ -115,7 +117,7 @@
                 <button mat-button
                     mat-raised-button
                     color="primary"
-                    (click)="updateExponentialDistribution()">Сгенерировать экспоненциальное распределение</button>
+                    (click)="updateExponentialDistribution()">Сгенерировать</button>
             </p>
             <hr>
         </app-distribution>
@@ -127,7 +129,8 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-distribution [distribution]="distributions.gamma.distribution">
-            <p class="font-weight-bold">Входные параметры распределения</p>
+          <img src="assets/gamma_distribution.png">
+          <p class="font-weight-bold">Входные параметры распределения</p>
             <mat-form-field class="mr-2">
                 <input matInput
                     type="number"
@@ -150,7 +153,7 @@
                 <button mat-button
                     mat-raised-button
                     color="primary"
-                    (click)="updateGammaDistribution()">Сгенерировать гамма распределение</button>
+                    (click)="updateGammaDistribution()">Сгенерировать</button>
             </p>
             <hr>
         </app-distribution>
@@ -162,6 +165,7 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-distribution [distribution]="distributions.triangle.distribution">
+            <img src="assets/triangle_distribution.png">
             <p class="font-weight-bold">Входные параметры распределения</p>
             <mat-form-field class="mr-2">
                 <input matInput
@@ -194,7 +198,7 @@
                 <button mat-button
                     mat-raised-button
                     color="primary"
-                    (click)="updateTriangleDistribution()">Сгенерировать треугольное распределение</button>
+                    (click)="updateTriangleDistribution()">Сгенерировать</button>
             </p>
             <hr>
         </app-distribution>
@@ -206,7 +210,8 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-distribution [distribution]="distributions.simpson.distribution">
-            <p class="font-weight-bold">Входные параметры распределения</p>
+          <p>Согласно этой формуле необходимо получить два случайных числа y и z , распределенные равномерно на интервале [a/2, b/2], и просуммировать их</p>
+          <p class="font-weight-bold">Входные параметры распределения</p>
             <mat-form-field class="mr-2">
                 <input matInput
                     type="number"
@@ -229,7 +234,7 @@
                 <button mat-button
                     mat-raised-button
                     color="primary"
-                    (click)="updateSimpsonDistribution()">Сгенерировать треугольное распределение</button>
+                    (click)="updateSimpsonDistribution()">Сгенерировать</button>
             </p>
             <hr>
         </app-distribution>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChange, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-gistogram',
@@ -10,6 +10,14 @@ export class GistogramComponent {
     data: [],
     label: 'Чисел в интервале'
   }];
+
+  options = {
+    // scales: {
+    //   y: {
+    //     suggestedMin: 0
+    //   }
+    // }
+  };
 
   labels: string[] = [];
 

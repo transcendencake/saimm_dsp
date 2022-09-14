@@ -162,6 +162,6 @@ interface ID3DrawerDefaults {
 
 interface ISmoRequest {
     id: number;
-    lifeTime: number; 
+    lifeTime: number;
     isHandled: boolean;
 }

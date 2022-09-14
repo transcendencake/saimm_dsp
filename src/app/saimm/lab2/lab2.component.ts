@@ -118,7 +118,7 @@ export class Lab2Component implements OnInit {
     const { lambda, n, amount } = this.distributions.gamma.settings;
     this.distributions.gamma.distribution = this.arrayUtils.create(amount, () => {
       const randArr = this.distributionService.getRandomNumbers(n);
-      return -(1 / lambda) * sum(randArr);
+      return -(1 / lambda) * sum(randArr.map(p => Math.log(p)));
     });
   }
 
