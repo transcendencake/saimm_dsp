@@ -8,11 +8,19 @@ export class MenuService {
     saimm: [
       {
         link: '/saimm/lab1',
-        title: 'Lab1'
+        title: 'Saimm Lab1'
       },
       {
         link: '/saimm/lab2',
-        title: 'Lab2'
+        title: 'Saimm Lab2'
+      },
+      {
+        link: '/dsp/lab1',
+        title: 'Dsp Lab1'
+      },
+      {
+        link: '/dsp/lab2',
+        title: 'Dsp Lab2'
       }
       // ,
       // {

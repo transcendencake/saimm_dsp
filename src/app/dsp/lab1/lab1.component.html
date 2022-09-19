@@ -1,0 +1,59 @@
+<p>
+  <span>N = {{N}}</span>
+  <button (click)="multiplyNBy2()">*2</button>
+  <button [disabled]="N <= 512" (click)="divideNBy2()">/2</button>
+</p>
+<button (click)="calculate()">Recalculate</button>
+
+<section>
+  <h3>Harmonical</h3>
+  <h4>Const A and f</h4>
+  <div class="canvas-wrapper">
+    <canvas baseChart
+            chartType="line"
+            [options]="options"
+            [labels]="labels"
+            [datasets]="constAAndFDatasets">
+    </canvas>
+  </div>
+
+  <h4>Const A and Fi</h4>
+  <div class="canvas-wrapper">
+    <canvas baseChart
+            chartType="line"
+            [options]="options"
+            [labels]="labels"
+            [datasets]="constAAndFiDatasets">
+    </canvas>
+  </div>
+
+  <h4>Const F and Fi</h4>
+  <div class="canvas-wrapper">
+    <canvas baseChart
+            chartType="line"
+            [options]="options"
+            [labels]="labels"
+            [datasets]="constFAndFiDatasets">
+    </canvas>
+  </div>
+</section>
+
+<h3>Polyharmonical</h3>
+<div class="canvas-wrapper">
+  <canvas baseChart
+          chartType="line"
+          [options]="options"
+          [labels]="labels"
+          [datasets]="polyharmonicalDatasets">
+  </canvas>
+</div>
+
+<h3>Harmonical + linear</h3>
+<div class="canvas-wrapper">
+  <canvas baseChart
+          chartType="line"
+          [options]="options"
+          [labels]="labels"
+          [datasets]="linearHarmonicalDatasets">
+  </canvas>
+</div>
