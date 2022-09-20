@@ -53,7 +53,7 @@ export class Lab1Component implements OnInit {
   }
 
   public calculate(): void {
-    this.labels = Array(this.N - 1).fill(0).map((_, i) => i.toString());
+    this.labels = Array(this.N + 1).fill(0).map((_, i) => i.toString());
     this.setPolyharmonicalDataset();
     this.setConstAAndFDatasets();
     this.setConstAAndFiDatasets();
@@ -64,7 +64,7 @@ export class Lab1Component implements OnInit {
   private setPolyharmonicalDataset(): void {
     const a = 9;
     const fi = [Math.PI / 2, 0, Math.PI / 4, Math.PI / 3, Math.PI / 6];
-    const tempDatasets = Array.from(Array(this.phaseCount), () => new Array(this.N));
+    const tempDatasets = Array.from(Array(this.phaseCount), () => new Array(1));
     for (let i = 0; i < this.phaseCount; i++) {
       for (let j = 0; j < this.N; j++) {
         tempDatasets[i][j] = a * Math.sin(2 * Math.PI * (i + 1) * j / this.N + fi[i]);
