@@ -11,6 +11,7 @@ import { SmoService } from './kr1/smo.service';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared.module';
 import { SaimmRoutingModule } from './saimm-routing.module';
+import { Lab3Component } from './lab3/lab3.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { SaimmRoutingModule } from './saimm-routing.module';
     GistogramComponent,
     BigArrayComponent,
     DistributionComponent,
-    Kr1Component
+    Kr1Component,
+    Lab3Component
   ],
   providers: [DistributionService, SmoService]
 })

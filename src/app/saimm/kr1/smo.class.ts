@@ -1,4 +1,4 @@
-import { AlghorythmUtils } from "src/app/utils/alghorythm.utils";
+import { AlghorythmUtils } from 'src/app/utils/alghorythm.utils';
 
 export class SmoClass implements ISmo {
     idCounter = 0;
@@ -13,7 +13,7 @@ export class SmoClass implements ISmo {
         getNextValue: () => Math.random() < 0.7 ? 0 : 1,
         getExplanation: () => {
             if (this.source.prevValue == null) {
-                return 'Начальное состояние'
+                return 'Начальное состояние';
             }
 
             return this.source.value === 1
@@ -35,7 +35,7 @@ export class SmoClass implements ISmo {
             : Math.random() < 0.7 ? 0 : 1,
         getExplanation: () => {
             if (this.source.prevValue == null) {
-                return 'Начальное состояние'
+                return 'Начальное состояние';
             }
 
             return this.source.prevValue === 1
@@ -52,14 +52,14 @@ export class SmoClass implements ISmo {
         prevRequestId: null,
         destroyedId: null,
         getPossibleNextValues: () => {
-            return this.storage.value == 1 ? [0, 1] : [0];
+            return this.storage.value === 1 ? [0, 1] : [0];
         },
         getNextValue: () => this.storage.prevValue === 0
             ? 0
             : Math.random() < 0.75 ? 0 : 1,
         getExplanation: () => {
             if (this.source.prevValue == null) {
-                return 'Начальное состояние'
+                return 'Начальное состояние';
             }
 
             return this.storage.prevValue === 1
@@ -68,7 +68,7 @@ export class SmoClass implements ISmo {
                     : 'второй канал просеял заявку'
                 : null;
         }
-    }
+    };
 
     constructor() {
     }
@@ -94,11 +94,11 @@ export class SmoClass implements ISmo {
         }
         this.destination.value = this.destination.getNextValue();
         this.destination.prevRequestId = this.destination.requestId;
-        if(this.destination.value === 1) {
+        if (this.destination.value === 1) {
             this.destination.requestId = this.storage.prevRequestId;
         } else {
             this.destination.requestId = null;
-            if(this.storage.prevValue === 1) {
+            if (this.storage.prevValue === 1) {
                 this.destination.destroyedId = this.storage.prevRequestId;
             }
         }

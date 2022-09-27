@@ -1,0 +1,90 @@
+<h3>Условие</h3>
+<img src="/assets/saimm/task.png" />
+<ol>
+    <li>
+        Источник с вероятностью просеивания (не выдачи) заявки =
+        <input type="number"
+               min="0"
+               max="1"
+               step="0.1"
+               [(ngModel)]="p">
+    </li>
+    <li>Накопитель на 2 заявки</li>
+    <li>
+        Канал с вероятностью просеивания (не обслуживания) заявки =
+        <input type="number"
+               min="0"
+               max="1"
+               step="0.1"
+               [(ngModel)]="pi1">
+    </li>
+    <li>Канал с вероятностью просеивания (не обслуживания) заявки =
+        <input type="number"
+               min="0"
+               max="1"
+               step="0.1"
+               [(ngModel)]="pi2">
+    </li>
+</ol>
+<h3>Граф состояний</h3>
+<img src="/assets/saimm/graph.jpg" />
+<div>
+    <h3>Найти:</h3>
+    <ul>
+        <li>Р<sub>отк</sub> - вероятность отказа (вероятность того, что заявка, сгенерированная
+            источником, не будет в конечном итоге обслужена системой) = {{stats.pOtk}}</li>
+        <li>Q - относительная пропускная способность (вероятность того, что заявка,
+            сгенерированная источником, будет в конечном итоге обслужена системой) = {{stats.q}}</li>
+        <li>L<sub>оч</sub> - среднее число заявок находящихся в системе = {{stats.lOch}}</li>
+        <li>L<sub>c</sub> - среднее число заявок находящихся в системе = {{stats.lSr}}</li>
+        <li>A - абсолютная пропускная способность (среднее число заявок,
+            обслуживаемых системой в единицу времени, т.е. интенсивность потока
+            заявок на выходе системы) = {{stats.a}}</li>
+        <li>W<sub>оч</sub> - среднее время пребывания заявки в очереди = {{stats.wOch}}</li>
+        <li>W<sub>c</sub> - среднее время пребывания заявки в системе = {{stats.wSr}}</li>
+        <li>K<sub>кан1</sub> - коэффициент загрузки 1 канала (вероятность занятости 1 канала) = {{stats.k1}}</li>
+        <li>K<sub>кан2</sub> - коэффициент загрузки 2 канала (вероятность занятости 2 канала) = {{stats.k2}}</li>
+    </ul>
+    <div>
+        <div>
+            Кол-во тактов =
+            <input type="number"
+                   [(ngModel)]="n">
+        </div>
+        <button mat-button
+                mat-raised-button
+                color="primary"
+                (click)="process()">
+            Посчитать всё
+        </button>
+        <button mat-button
+                mat-raised-button
+                color="primary"
+                (click)="calculateStats()">
+            Посчитать статистические данные
+        </button>
+        <button mat-button
+                mat-raised-button
+                color="primary"
+                (click)="step()">
+            Сделать шаг
+        </button>
+        <button mat-button
+                mat-raised-button
+                color="primary"
+                (click)="reset()">
+            Обнулить
+        </button>
+    </div>
+</div>
+<div>
+    <h4>Шаги</h4>
+    <ol>
+        <li *ngFor="let stat of stepStats">
+            Состояние до начала такта: {{stat.currState}}
+            <ul>
+                <li *ngFor="let log of stat.logs">{{log}}</li>
+            </ul>
+        </li>
+    </ol>
+</div>

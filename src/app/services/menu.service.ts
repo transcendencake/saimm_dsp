@@ -21,12 +21,11 @@ export class MenuService {
       {
         link: '/dsp/lab2',
         title: 'Dsp Lab2'
+      },
+      {
+        link: '/saimm/lab3',
+        title: 'saimm Lab 3-4'
       }
-      // ,
-      // {
-      //   link: '/saimm/kr1',
-      //   title: 'KR1'
-      // }
     ]
   };
 
