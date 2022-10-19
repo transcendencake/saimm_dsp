@@ -68,10 +68,12 @@ export class Lab3Component {
         this.stepStats.push(currStats);
         currStats.currState = this.getState();
 
-        if (this.firstProcessor.currRequest) {
+        if (this.firstProcessor.currRequest != null) {
             currStats.p1busy = true;
             currStats.requestsInSystem++;
-            this.firstProcessor.currRequest.timeInSystem++;
+            if (this.pi1 < 1) {
+                this.firstProcessor.currRequest.timeInSystem++;
+            }
 
             if (!this.hasEventHappened(this.pi1)) {
                 currStats.requestsProceeded++;
@@ -84,10 +86,13 @@ export class Lab3Component {
             currStats.p1busy = false;
         }
 
-        if (this.secondProcessor.currRequest) {
+        if (this.secondProcessor.currRequest != null) {
             currStats.p2busy = true;
             currStats.requestsInSystem++;
-            this.secondProcessor.currRequest.timeInSystem++;
+
+            if (this.pi2 < 1) {
+                this.secondProcessor.currRequest.timeInSystem++;
+            }
 
             if (!this.hasEventHappened(this.pi2)) {
                 currStats.requestsProceeded++;
@@ -103,24 +108,29 @@ export class Lab3Component {
         if (this.queue.requests.length > 0) {
             currStats.queueLength += this.queue.requests.length;
             currStats.requestsInSystem += this.queue.requests.length;
-
-            const requestsInQueue = [...this.queue.requests];
-            for (const request of requestsInQueue) {
-                request.timeInQueue++;
-                request.timeInSystem++;
-
-                if (!this.firstProcessor.currRequest) {
+            const queueLength = this.queue.requests.length;
+            for (let i = 0; i < queueLength; i++) {
+                this.queue.requests[i].timeInQueue++;
+                this.queue.requests[i].timeInSystem++;
+            }
+            console.log(this.queue.requests);
+            for (let i = 0; i < queueLength; i++) {
+                let request;
+                if (this.firstProcessor.currRequest == null || this.secondProcessor.currRequest == null) {
+                    request = this.queue.requests.shift();
+                }
+                if (this.firstProcessor.currRequest == null) {
                     this.firstProcessor.currRequest = request;
-                    this.queue.requests.splice(this.queue.requests.indexOf(request));
                     currStats.logs.push('заявка из очереди выдана на первый канал');
-                } else if (!this.secondProcessor.currRequest) {
+                } else if (this.secondProcessor.currRequest == null) {
                     this.secondProcessor.currRequest = request;
-                    this.queue.requests.splice(this.queue.requests.indexOf(request));
                     currStats.logs.push('заявка из очереди выдана на второй канал');
                 } else {
                     currStats.logs.push('заявка из очереди не выдана');
                 }
             }
+            const requestsInQueue = [...this.queue.requests];
+            console.log(this.queue.requests);
         }
 
         if (!this.hasEventHappened(this.p)) {
@@ -183,8 +193,8 @@ export class Lab3Component {
         stats.lOch = queueLength / this.stepStats.length;
         stats.lSr = requestsInSystemAmount / this.stepStats.length;
         stats.a = processedCount / this.stepStats.length;
-        stats.wOch = timeInQueue / this.stepStats.length;
-        stats.wSr = timeInSystem / this.stepStats.length;
+        stats.wOch = timeInQueue / this.requests.length;
+        stats.wSr = timeInSystem / this.requests.length;
         stats.k1 = busyTime1 / this.stepStats.length;
         stats.k2 = busyTime2 / this.stepStats.length;
         this.stats = stats;
